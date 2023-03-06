@@ -14,6 +14,7 @@ export interface IParamRoles {
     description?: string;
     path?: string;
     method?: string;
-    status?: number;
+    status?: string;
+   // roles?: Array<any>;
   }
   
