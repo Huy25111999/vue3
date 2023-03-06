@@ -1,7 +1,7 @@
 <template>
+  <div class="wapper">
     <div class="center">
       <h1>Login</h1>
-
         <Form class="form-container" @submit="onSubmit">
             <div class="txt_field">
               <v-text-field v-model="form.account" label="username" ></v-text-field>
@@ -24,7 +24,7 @@
             </div>
         </Form>
     </div>
-
+  </div>
 </template>
 
 <script lang="ts">
@@ -72,7 +72,7 @@ import { Form } from "vee-validate";
   }
 </script>
 
-<style >
+<style scoped>
     @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@700&family=Poppins:wght@400;500;600&display=swap');
     *{
     margin: 0;
@@ -87,6 +87,10 @@ import { Form } from "vee-validate";
     background: linear-gradient(120deg,#2980b9, #8e44ad);
     height: 100vh;
     overflow: hidden;
+    }
+
+    .wapper {
+      background: linear-gradient(120deg,#2980b9, #8e44ad);      height: 100vh;
     }
     .center{
     position: absolute;

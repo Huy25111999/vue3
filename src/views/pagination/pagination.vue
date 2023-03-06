@@ -67,7 +67,7 @@
           </v-btn>
         </div>
         <!-- Table -->
-        <v-table >
+        <v-table  >
           <thead>
             <tr>
               <th scope="col" class="text-center">STT</th>
@@ -91,7 +91,7 @@
             />
           </tbody>
         </v-table>
-        <div v-if="roleList.length === 0 && !loading"
+        <div v-if="roleList.length === 0 && !loading" contenteditable="true"
           class="w-full flex justify-center items-center"
         >
           <img src="@/assets/image/no-data.png" />

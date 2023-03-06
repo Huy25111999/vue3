@@ -62,6 +62,8 @@ export default defineComponent({
             method: formAddRole.method,
             status: 1
           }
+          console.log("request",request);
+          
           actions.creatRole(request).then((res:any) =>{
             snackNotification.showSuccess("Tạo mới thành công")
             props.fetchRolesFn();

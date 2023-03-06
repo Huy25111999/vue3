@@ -1,9 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/pagination/pagination.vue'
+import Pagination from '../views/pagination/pagination.vue'
 import Layout from "../layouts/index.vue"
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
-  routes: [
+  routes: 
+  [
     {
       path: '/login',
       name: 'login',
@@ -18,7 +19,7 @@ const router = createRouter({
       children:[{
         path:"/home",
         name:"Home",
-        component: () => import ("../views/pagination/pagination.vue"),
+        component: Pagination,
       }]
     },
     {
@@ -29,7 +30,7 @@ const router = createRouter({
         name:'form',
         component: () => import ("../views/form/pageForm.vue"),
     }]
-  },
+    },
     {
       path: '/form-validate',
       component: Layout,

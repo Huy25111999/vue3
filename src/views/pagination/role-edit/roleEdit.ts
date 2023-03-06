@@ -17,19 +17,19 @@ export default defineComponent({
         const methodOptions = [
             {
               label: "GET",
-              value: "get",
+              value: "GET",
             },
             {
               label: "PUT",
-              value: "put",
+              value: "PUT",
             },
             {
               label: "POST",
-              value: "post",
+              value: "POST",
             },
             {
               label: "DELETE",
-              value: "delete",
+              value: "DELETE",
             },
           ];
         const formEditRole = reactive<any>({
@@ -46,10 +46,11 @@ export default defineComponent({
             code: Yup.string().required("code required").max(50,"max length 50"),
             path: Yup.string().required("path required").max(50,"max length 50"),
             description: Yup.string().required("description required").max(50,"max length 50"),
-  
           });
 
         watchEffect(()=>{
+          console.log("item edit", props.roleSelected);
+          
             if(props.roleSelected){
                formEditRole.name = props?.roleSelected?.name;
                formEditRole.code = props?.roleSelected?.code; 

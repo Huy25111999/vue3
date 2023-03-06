@@ -25,13 +25,17 @@
                        :class="{ 'hasError': !!errors.cardEmail && checkValidate.cardEmail && !formAddValues.cardEmail.length }"
                        @blur="validate('cardEmail')"
                        name="cardEmail"
-                       type="text" id="input-group-1"
+                       type="email" id="input-group-1"
                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                       placeholder="name@flowbite.com">
+                       placeholder="name@flowbite.com"
+                       required>
               </div>
               <p v-if="!!errors.cardEmail && checkValidate.cardEmail && !formAddValues.cardEmail.length" class="validate-message">
                 {{errors.cardEmail}}
               </p>
+              <div v-if="!!errors.cardEmail && checkValidate.cardEmail && formAddValues.cardEmail.length>50" class="validate-message">
+                  Email phải dưới 50 ký tự
+              </div>
             </div>
             <div>
               <ion-label class="mb-5">Card name<span>*</span></ion-label>

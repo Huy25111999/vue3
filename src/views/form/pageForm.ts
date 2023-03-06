@@ -1,7 +1,7 @@
 
 
 import { Field, Form } from "vee-validate";
-import { computed, defineComponent, onMounted, reactive, ref } from "vue";
+import { computed, defineComponent, onMounted, reactive, ref, watch } from "vue";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
 import * as Yup from "yup";
@@ -15,7 +15,7 @@ export default defineComponent({
   setup() {
     const store = useStore();
     const clickSubmit = ref(false);
-
+    const isValid = ref("");
 
     const schemaAddCard = Yup.object().shape({
       cardName: Yup.string()
@@ -26,8 +26,16 @@ export default defineComponent({
           .required("wallet.top-up.error.account_number_require")
           .nullable()
           .max(20, "wallet.top-up.error.account_number_max"),
-      cardEmail: Yup.string(),
-      cardCVC: Yup.string()
+      cardEmail: Yup.string()
+        .max(50, "admin_email_maxLength")
+        .matches(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.[com]\w{2,2})+$/, "admin_account_email_invalid")
+        .required("admin_account_email_required")
+        .email("admin_account_email_invalid"),
+          // .matches(/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(\.[com]\w{2,2})+$/, "wallet.top-up.error.emailInvalid")
+          // .max(50, "wallet.top-up.error.card_email_max")
+          // .required("wallet.top-up.error.email_require"),
+        
+        cardCVC: Yup.string()
           .required("wallet.top-up.error.swiftCode_require")
           .nullable()
           .max(50, "wallet.top-up.error.swiftCode_max"),
@@ -56,7 +64,7 @@ export default defineComponent({
     });
     const validate = (field:any) =>{
       checkValidate.value[field] = true;
-      schemaAddCard.validateAt(field, schemaAddCard[field])
+      schemaAddCard.validateAt(field, schemaAddCard[field]);
   }
 
     const handleSubmit = (values:any) => {        
@@ -88,8 +96,7 @@ export default defineComponent({
         formAddValues,
         schemaAddCard,
         checkValidate,
-        validate
-        
+        validate,
     };
   },
 });

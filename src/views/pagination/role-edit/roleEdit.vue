@@ -3,10 +3,9 @@
         <v-card>
             <v-card-title>
                 <div class="flex justify-between">
-                    <p>Edit Role</p>
+                    <h4>Edit role</h4>
                     <div class="close-btn" @click="$props.onHide">
-                        <p>close</p>
-                        <font-awesome-icon icon="fa-solid fa-xmark"/>
+                        <span class="material-icons">close</span>                   
                     </div>
                 </div>
             </v-card-title>

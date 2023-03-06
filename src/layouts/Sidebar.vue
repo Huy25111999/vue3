@@ -19,14 +19,20 @@
 				<span class="text">Home</span>
 			</router-link>
 
-			<router-link to="/form" class="button">
-				<span class="material-icons">description</span>
-				<span class="text">Form</span>
-			</router-link>
-			<router-link to="/form-validate" class="button">
-				<span class="material-icons">description</span>
-				<span class="text">Form validate</span>
-			</router-link>
+			<ul>
+				<li>
+					<router-link to="/form" class="button">
+						<span class="material-icons">description</span>
+						<span class="text">Form</span>
+					</router-link>
+				</li>
+				<li>
+					<router-link to="/form-validate" class="button">
+						<span class="material-icons">description</span>
+						<span class="text">Form validate</span>
+					</router-link>
+				</li>
+			</ul>
 
 			<router-link to="/login" class="button">
 				<span class="material-icons">email</span>
@@ -73,7 +79,7 @@ const ToggleMenu = () => {
 
 		width: calc(2rem + 32px);
 		overflow: hidden;
-		min-height: 100vh;
+		min-height: 100%;
 		padding: 1rem;
 
 		transition: 0.2s ease-in-out;
@@ -187,7 +193,7 @@ const ToggleMenu = () => {
 	}
 
 	.is-expanded {
-		width: 250px;
+		width: 200px;
 		height: 100%;
 	}
 
@@ -213,6 +219,12 @@ const ToggleMenu = () => {
 	button.menu-toggle {
 		background: #1e293b;
 		border: 0;
+	}
+
+	@media (min-width: 768px){
+		.container {
+			max-width: 100%;
+		}
 	}
 
 	/* // @media (max-width: 1024px) {

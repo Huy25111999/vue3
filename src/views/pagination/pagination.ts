@@ -61,9 +61,55 @@ export default defineComponent({
     }
 
     // pagination datatable
-    const roleList: Array<Enum.IRole> = computed( ()=>
-      store.getters.role.roleList as any
-      )
+    // const roleList: Array<Enum.IRole> = computed( ()=>
+    //   store.getters.role.roleList as any
+    //   )
+    
+    const roleList = [
+      {
+        id: "1233473485304830480348038573454937",
+        name: 'Frozen Yogurt',
+        code: "acns",
+        method: "GET",
+        path: "145.279.4.12",
+      },
+      {
+        id: "12483648736487263482374892374892374982",
+        name: 'Ice cream sandwich',
+        code: "3823",
+        method: "POST",
+        path: "145.279.4.12",
+      },
+      {
+        id:"347384792834789234w7294792233",
+        name: 'Eclair',
+        code: "3424",
+        method: "DELETE",
+        path: "145.279.4.12",
+      },
+      {
+        id: "123283y79283749837493879843",
+        name: 'Frozen Yogurt',
+        code: "acns",
+        method: "GET",
+        path: "145.279.4.12",
+      },
+      {
+        id: "1248397483478384834838483",
+        name: 'Ice cream sandwich',
+        code: "3823",
+        method: "POST",
+        path: "145.279.4.12",
+      },
+      {
+        id:"34733o497938479494397",
+        name: 'Eclair',
+        code: "3424",
+        method: "DELETE",
+        path: "145.279.4.12",
+      },
+      
+    ]
 
     const totalRoles = computed(() => store.getters.role.total);
     const loading = computed(() => store.getters.role.loading);
@@ -140,6 +186,8 @@ export default defineComponent({
       const params: Enum.IRole = {
         id: roleSelected.value?.id,
       };
+      console.log("params delete", params);
+      
     }
 
     return{

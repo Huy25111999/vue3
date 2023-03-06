@@ -1,12 +1,12 @@
 <template>
     <v-app>
       <!-- <v-main> -->
-        <div id="app" class="bg-gray-200">
+        <div class="bg-gray-200">
           <div class="app-content row">
             <div class="admin" >
               <Sidebar />
             </div>
-            <div class="container">
+            <div class="container-right">
               <Navbar />
               <v-main>
                 <router-view></router-view>
@@ -25,7 +25,7 @@
   import Navbar from './Navbar.vue'
   
   export default {
-    name: 'Layout',
+    name: 'layout',
   
     components: {
       Sidebar,
@@ -77,30 +77,19 @@
       background: #f1f1f1;
     }
   
-    /*container*/
+    /*wrapper*/
     .app-content {
       display: flex;
+      height: 100%;
+      position: absolute;
+      width: 100%;
     }
   
-    #app main {
-      flex: 1 1 0;
-    }
-    .container {
+    .container-right {
       width: 100%;
+      background: #aca8a8;
+      overflow: auto;
   }
   
-    @media (min-width: 1400px) {
-      .container-xxl, .container-xl, .container-lg, .container-md, .container-sm, .container {
-        max-width: 100%;
-  
-      }
-      .container-body {
-        border: 1px solid #ccc;
-        border-radius: 10px;
-      }
-      .content{
-        margin: 18px;
-      }
-    }
   
   </style>
