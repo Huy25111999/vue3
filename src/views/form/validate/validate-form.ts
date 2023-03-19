@@ -1,21 +1,30 @@
 
 
 import { Field, Form } from "vee-validate";
-import { computed, defineComponent, onMounted, reactive, ref } from "vue";
+import { computed, defineComponent, onMounted, reactive, ref, toRaw, watchEffect } from "vue";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
 import * as Yup from "yup";
+import InputAvatar from "@/assets/controls/InputAvatar.vue";
+import SelectField from "@/assets/controls/SelectField.vue";
+import InputDatePicker from "@/assets/controls/InputDatePicker.vue";
+import moment from "moment";
+
+const MAX_SIZE = 10*1024*1024;
 
 export default defineComponent({
   name: "WalletsPage",
   components: {
     Form,
     Field,
+    InputAvatar,
+    SelectField,
+    InputDatePicker
   },
-  setup() {
+  setup(props, ctx) {
     const store = useStore();
     const clickSubmit = ref(false);
-
+    const files = ref(Array);
 
     const schema = Yup.object().shape({
       title: Yup.string()
@@ -41,29 +50,139 @@ export default defineComponent({
           .oneOf([Yup.ref('password'), null], 'Passwords must match')
           .required('Confirm Password is required'),
       acceptTerms: Yup.string()
-          .required('Accept Ts & Cs is required')
+          .required('Accept Ts & Cs is required'),
+          dateTo: Yup.date().when("dateFrom", (dateFrom, schema) => {
+            if (dateFrom) {             
+              const dayAfter = new Date(moment(new Date(dateFrom.getTime())).subtract(1, "days").toDate().setHours(0,0,0));
+              const beforeOneMonth = new Date(
+                moment(dayAfter).add(28, "days").toDate().setHours(24,0,0)
+              );          
+              return schema
+                .min(dayAfter, intl("customer_detail_user_history_min_length"))
+                .max(
+                  beforeOneMonth,
+                  intl("customer_detail_user_history_max_length")
+                );
+            }
+            return schema;
+          }),
       });
 
+      const options = [
+        {
+          label: "GET",
+          value: "get",
+        },
+        {
+          label: "PUT",
+          value: "put",
+        },
+        {
+          label: "POST",
+          value: "post",
+        },
+        {
+          label: "DELETE",
+          value: "delete",
+        },
+      ];
     const formAddValues = reactive({
-      cardNumber: "",
-      cardExpYear: "",
-      cardCVC: "",
-      cardName: "",
-      cardEmail: ""
+      title:"Mr",
+      firstName: "",
+      lastName: "",
+      dob: "",
+      email: "",
+      password: "",
+      confirmPassword:"",
+      acceptTerms: false,
+      files: undefined,
+      dateFrom: moment().subtract(7, "day").toDate(),
+      dateTo: moment().toDate()
     });
+ 
     const onSubmit = (values:any) => {        
-        console.log("ágdvj");
-        
+        console.log("fileKycKeys value", files.value);
+        const request = {
+          ...toRaw(formAddValues),
+          files:  files.value
+        }
+
+        console.log("request",request);
     }
 
     onMounted(()=>{
 
     })
 
+
+    // file avatar 
+    const wrapperRef = ref();
+    const filePreview = ref("");
+    const imageError = ref ("");
+    const size = ref("");
+
+    watchEffect(() => {
+      filePreview.value 
+    });
+
+    const onDragEnter = () => {
+      wrapperRef.value.classList.add("dragover");
+    };
+
+    const onDragLeave = () => {
+       wrapperRef.value.classList.remove("dragover");
+    };
+
+    const onFileDrop = (e: any) => {
+      imageError.value = " ";
+      const file = e.target.files[0];
+      console.log("file--------", file);
+      files.value = file;
+      
+      if (file) {
+        wrapperRef.value.classList.remove("dragover");
+        ctx.emit("input", file);
+        filePreview.value = URL.createObjectURL(file);
+
+        console.log("filePreview", filePreview);
+        
+      }  
+
+      if(!file || file.type.indexOf('image/') !== 0) return;
+      size.value = file.size;
+      if(size.value > MAX_SIZE) {
+        imageError.value = 'Kích thước avatar phải dưới 10MB';
+        filePreview.value = "";
+        return;
+      }
+      
+    };
+    
+    const handleChange = (e: any) => {};
+
+    const onRemove = () => {
+      filePreview.value = "";
+      ctx.emit("input", "");
+    };
+
+
+
     return {
-        onSubmit,
-        formAddValues,
-        schema
+      onSubmit,
+      formAddValues,
+      schema,
+       // handleFormData
+      onDragEnter,
+      onDragLeave,
+      onFileDrop,
+      onRemove,
+      handleChange,
+      filePreview,
+      wrapperRef,
+      MAX_SIZE, 
+      imageError,
+      size,
+      options
         
     };
   },
