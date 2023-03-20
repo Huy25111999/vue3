@@ -52,7 +52,18 @@ export default defineComponent({
     });
 
     onMounted(()=>{
-
+      const arrA = [{key:'a', value:'a1'}, {key:'b', value:'a2'}]
+      const arrB = [{key:'a', display:'value'}, {key:'b', display:'value'}]
+      console.log(arrA, arrB);
+      const data = arrA.find(e =>{
+        return e.key === 'a'
+      });      
+      const result = arrB.map(e=>{
+         return { display:data?.value}
+      })
+      console.log("data", result);
+      
+     
     })
 
     const checkValidate = ref({
@@ -91,6 +102,7 @@ export default defineComponent({
       //         })
     }
 
+   
     return {
         handleSubmit,
         formAddValues,
