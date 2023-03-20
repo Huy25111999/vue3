@@ -40,3 +40,24 @@ export const deleteRole = (params: Enum.IRole) => {
     data: {},
   });
 };
+
+// form data-----------
+export const updateUser = (params: Enum.IRole)=>{
+  const requestBody = new FormData();
+  params.name && requestBody.append("name", params.name);
+  (params.status || params.status == "0") && requestBody.append("status",params.status);
+  //params.roles && requestBody.append("roles", JSON.stringify(params.roles));
+  return axios({
+    url:"",
+    method:"PUT",
+    data: requestBody
+  })
+}
+
+// Params-body-------
+// return axios({
+//   url: UPDATE_CUSTOMER_KYC + params.id,
+//   method: "PUT",
+//   params:{status: params.status},
+//   data: body,
+// });
