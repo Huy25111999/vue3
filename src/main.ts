@@ -17,11 +17,13 @@ import "./assets/styles/global.css"
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fas } from '@fortawesome/free-solid-svg-icons';
 library.add(fas);
-import FontAwesomeIcon from "@/plugins/fontawesome-icons";
 
+import FontAwesomeIcon from "@/plugins/fontawesome-icons";
 loadFonts()
 
 let app;
+const messages = {};
+
 app = createApp(App);
   app.use(router);
   app.use(vuetify);
