@@ -9,6 +9,8 @@ import {
 // Components form
 import { Form } from "vee-validate";
 import InputField from "@/assets/controls/InputField.vue";
+
+
 import  {Enum}  from "@/types"; 
 import * as actions from "@/api/roles/roleActions";
 import RoleTr from "./role-tr/roleTrTable.vue";
@@ -108,6 +110,13 @@ export default defineComponent({
         method: "DELETE",
         path: "145.279.4.12",
       },
+      {
+        id: "12483648736487263482374892374892374982",
+        name: 'Ice cream sandwich',
+        code: "3823",
+        method: "POST",
+        path: "145.279.4.12",
+      }
       
     ]
 

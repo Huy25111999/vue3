@@ -22,7 +22,7 @@
         <td><p class="w-[150px]">{{$props?.item?.path}}</p></td>
         <td>
             <div class="flex justify-center">
-                <span @click="$props.onEdit($props.item)" class="material-icons text-blue-700">edit</span>
+                <span @click="$props.onEdit($props.item)" class="material-icons text-blue-700 mr-4">edit</span>
                 <span @click="$props.onDelete($props.item)" class="material-icons text-red">delete</span>
             </div>
         </td>

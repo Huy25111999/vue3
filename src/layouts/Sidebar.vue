@@ -4,6 +4,7 @@
 	<div class="sidebar">
 		<aside :class="`${is_expanded ? 'is-expanded' : ''}`">
 		<div class="logo">
+			<img :src="logoURL" alt="Vue" /> 
 		</div>
 
 		<div class="menu-toggle-wrap">
@@ -55,7 +56,7 @@
 
 <script setup>
 import { ref } from 'vue'
-
+import logoURL from "../assets/image/logo.png"
 const is_expanded = ref(localStorage.getItem("is_expanded") === "true")
 
 const ToggleMenu = () => {
@@ -96,9 +97,9 @@ const ToggleMenu = () => {
 	aside .flex {
 			flex: 1 1 0%;
 	}
-	aside .logo {
+	/* aside .logo {
 		margin-bottom: 1rem;
-	}
+	} */
 
 	.logo img {
 		width: 2rem;
@@ -107,7 +108,6 @@ const ToggleMenu = () => {
 	.menu-toggle-wrap {
 		display: flex;
 		justify-content: flex-end;
-		margin-bottom: 1rem;
 
 		position: relative;
 		top: 0;
@@ -227,8 +227,4 @@ const ToggleMenu = () => {
 		}
 	}
 
-	/* // @media (max-width: 1024px) {
-	// 	position: absolute;
-	// 	z-index: 99;
-	// } */
 </style>
