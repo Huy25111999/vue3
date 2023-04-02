@@ -34,6 +34,7 @@ import * as actions from "@/api/auth/authAction";
 import { useRouter } from "vue-router";
 import { useStore } from 'vuex';
 import { Form } from "vee-validate";
+import { useSnackBar } from '@/helpers/useSnackbar';
 
   export default{
     components:{
@@ -44,24 +45,49 @@ import { Form } from "vee-validate";
             account:"",
             password:""
         });
+        const snackNotification = useSnackBar();
 
         const  router = useRouter();
         const store = useStore();
         const onSubmit=() =>{
-            actions.login(form).then((res:any) =>{
+            // actions.login(form).then((res:any) =>{
             
-                console.log('res', res);
-                const token = res.data.token;
-                console.log('token',token);
+            //     console.log('res', res);
+            //     const token = res.data.token;
+            //     console.log('token',token);
                 
-                localStorage.setItem('token', token);
-                axios.defaults.headers.common['Authorization'] = 'Bearer ' + token
-                router.push("/home");
-             //   store.dispatch("auth/logged", res);
-            }).catch((err:any)=>{
-                console.log(err);
+            //     localStorage.setItem('token', token);
+            //     axios.defaults.headers.common['Authorization'] = 'Bearer ' + token
+            //     router.push("/home");
+            // }).catch((err:any)=>{
+            //     console.log(err);
                 
+            // })
+
+            actions
+            .login(form)
+            .then((res:any) => {
+              router.push("/");
+              store.dispatch("auth/logged", res);
+              snackNotification.showSuccess('login_successfully');
+
             })
+            .catch((err:any) => {
+
+              if(err.response.data.message === "Account not exist" || err.response.data.message === "Không tìm thấy tài khoản")
+              {
+                snackNotification.showError("login_message_exist");
+              }
+              else if(err.response.data.message === "Account must have at least 5 digits" || err.response.data.message === "Tài khoản phải có ít nhất 5 kí tự"){
+                snackNotification.showError("login_message_least_5_digits");
+              }
+              else if(err.response.data.message === "Password NOT Matched"){
+                snackNotification.showError("login_message_not_matched");
+              }
+              else{
+                snackNotification.showError(err.response.data.message);
+              }
+          });
         }
 
         return{

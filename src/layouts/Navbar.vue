@@ -42,6 +42,8 @@
   
   <script>
   //import Sidebar from './SidebarComponent.vue'
+  import * as actions from "@/api/auth/authAction";
+
     export default {
       components: {
       //Sidebar
@@ -68,10 +70,10 @@
       },
       methods: {
         logout(){
-          console.log('logout');
-          localStorage.removeItem('token');
-          localStorage.removeItem('is_expanded');
-          this.$router.push('./login')
+          // localStorage.removeItem('token');
+          // localStorage.removeItem('is_expanded');
+          actions.logout();
+          this.$router.push('/login')
         }
       }
     }

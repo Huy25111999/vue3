@@ -19,7 +19,7 @@
     </div>
   
     <p v-if="errorMessage && meta.touched" :class="'validate-message'">
-      {{ intl(errorMessage) }}
+      {{ errorMessage }}
     </p>
   </template>
   

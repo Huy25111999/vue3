@@ -60,7 +60,7 @@ export default defineComponent({
             path: values.path?.trim(),
             description: values.description?.trim(),
             method: formAddRole.method,
-            status: 1
+            status: "1"
           }
           console.log("request",request);
           
@@ -72,7 +72,7 @@ export default defineComponent({
             console.log('successs');
             
             
-          }).catch((error) =>{
+          }).catch((error:any) =>{
             snackNotification.showSuccess("Tạo mới thất bại")
             
           })

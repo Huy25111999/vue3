@@ -51,41 +51,41 @@ export default defineComponent({
           .required('Confirm Password is required'),
       acceptTerms: Yup.string()
           .required('Accept Ts & Cs is required'),
-          dateTo: Yup.date().when("dateFrom", (dateFrom, schema) => {
-            if (dateFrom) {             
-              const dayAfter = new Date(moment(new Date(dateFrom.getTime())).subtract(1, "days").toDate().setHours(0,0,0));
-              const beforeOneMonth = new Date(
-                moment(dayAfter).add(28, "days").toDate().setHours(24,0,0)
-              );          
-              return schema
-                .min(dayAfter, intl("customer_detail_user_history_min_length"))
-                .max(
-                  beforeOneMonth,
-                  intl("customer_detail_user_history_max_length")
-                );
-            }
-            return schema;
-          }),
-      });
+      dateTo: Yup.date().when("dateFrom", (dateFrom, schema) => {
+        if (dateFrom) {             
+          const dayAfter = new Date(moment(new Date(dateFrom.getTime())).subtract(1, "days").toDate().setHours(0,0,0));
+          const beforeOneMonth = new Date(
+            moment(dayAfter).add(28, "days").toDate().setHours(24,0,0)
+          );          
+          return schema
+            .min(dayAfter, "customer_detail_user_history_min_length")
+            .max(
+              beforeOneMonth,
+              "customer_detail_user_history_max_length"
+            );
+        }
+        return schema;
+      }),
+    });
 
-      const options = [
-        {
-          label: "GET",
-          value: "get",
-        },
-        {
-          label: "PUT",
-          value: "put",
-        },
-        {
-          label: "POST",
-          value: "post",
-        },
-        {
-          label: "DELETE",
-          value: "delete",
-        },
-      ];
+    const options = [
+      {
+        label: "GET",
+        value: "get",
+      },
+      {
+        label: "PUT",
+        value: "put",
+      },
+      {
+        label: "POST",
+        value: "post",
+      },
+      {
+        label: "DELETE",
+        value: "delete",
+      },
+    ];
     const formAddValues = reactive({
       title:"Mr",
       firstName: "",

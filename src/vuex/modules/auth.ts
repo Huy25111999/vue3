@@ -28,9 +28,7 @@ const state = {
     logged({ commit }: any, data: any) {
       commit("LOGGED", data);      
     },
-    logout({ commit }: any, data: any) {
-      console.log("log otu");
-  
+    logout({ commit }: any, data: any) {  
       commit("LOGOUT", data);
     },
   };

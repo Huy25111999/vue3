@@ -1,6 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Pagination from '../views/pagination/pagination.vue'
 import Layout from "../layouts/index.vue"
+import store from "@/vuex/store";
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: 
@@ -43,6 +45,16 @@ const router = createRouter({
   ]   
     }
   ]
-})
+});
+
+router.beforeEach((to, from, next) => {
+  if (to.fullPath === "/home" && from.fullPath === "/login") {
+    next();
+  } else if (to.fullPath !== "/login" && !store.getters.auth.userInfo?.token) {
+    next({ path: "/login" });
+  } else if (to.fullPath === "/login" && store.getters.auth.userInfo?.token) {
+    next({ path: "/home" });
+  } else next();
+});
 
 export default router

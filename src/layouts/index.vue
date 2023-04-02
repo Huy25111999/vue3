@@ -6,12 +6,15 @@
             <div class="admin" >
               <Sidebar />
             </div>
-            <div class="container-right">
-              <Navbar />
-              <v-main>
-                <router-view></router-view>
-              </v-main>
-  
+            <div class="wrapper-right">
+              <div class="nav-bar">
+                <Navbar />
+              </div>
+              <div class="wrapper-container">
+                <v-main>
+                  <router-view></router-view>
+                </v-main>
+              </div>
             </div>
           </div>
   
@@ -69,13 +72,13 @@
       background: none;
     }
      /*Header*/
-    .app-header {
+    /* .app-header {
       position: absolute;
       top: 0;
       width: 100%;
       z-index: 1;
       background: #f1f1f1;
-    }
+    } */
   
     /*wrapper*/
     .app-content {
@@ -85,11 +88,16 @@
       width: 100%;
     }
   
-    .container-right {
+    .wrapper-right {
       width: 100%;
       background: #aca8a8;
+    }
+    .wrapper-container{
+      width: 100%;
+      height: 100%;
       overflow: auto;
-  }
+      padding-bottom: 100px;
+    }
   
   
   </style>

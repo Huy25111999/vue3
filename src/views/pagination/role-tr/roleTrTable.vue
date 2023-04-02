@@ -16,10 +16,10 @@
                 </button>
             </div>
         </td>
-        <td><p class="w-[150px]">{{$props?.item?.name}}</p></td>
-        <td><p class="w-[150px]" >{{$props?.item?.code}}</p></td>
-        <td><p class="w-[150px]">{{$props?.item?.method}}</p></td>
-        <td><p class="w-[150px]">{{$props?.item?.path}}</p></td>
+        <td><p>{{$props?.item?.name}}</p></td>
+        <td><p >{{$props?.item?.code}}</p></td>
+        <td><p>{{$props?.item?.method}}</p></td>
+        <td><p>{{$props?.item?.path}}</p></td>
         <td>
             <div class="flex justify-center">
                 <span @click="$props.onEdit($props.item)" class="material-icons text-blue-700 mr-4">edit</span>

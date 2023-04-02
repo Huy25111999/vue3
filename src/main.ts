@@ -3,8 +3,11 @@ import App from './App.vue'
 import router from './router'
 import vuetify from './plugins/vuetify'
 import { loadFonts } from './plugins/webfontloader'
-import store from "./vuex/store"
 import VueClipboard from 'vue3-clipboard'
+import setUpAxios from "./plugins/axios/_setUpAxios";
+import store from "./vuex/store";
+import axios from "axios";
+
 // form
 import * as VeeValidate from "vee-validate"
 import VueCreditCardValidation from 'vue-credit-card-validation'
@@ -23,6 +26,7 @@ loadFonts()
 
 let app;
 const messages = {};
+setUpAxios(axios, store);
 
 app = createApp(App);
   app.use(router);

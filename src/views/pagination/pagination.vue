@@ -66,7 +66,6 @@
             Tạo mới
           </v-btn>
         </div>
-        <!-- Table -->
         <v-table  >
           <thead>
             <tr>

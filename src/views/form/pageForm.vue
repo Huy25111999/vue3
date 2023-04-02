@@ -21,21 +21,27 @@
                     <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
                   </svg>
                 </div>
-                <input v-model="formAddValues.cardEmail"
+                <!-- <input v-model="formAddValues.cardEmail"
                        :class="{ 'hasError': !!errors.cardEmail && checkValidate.cardEmail && !formAddValues.cardEmail.length }"
                        @blur="validate('cardEmail')"
                        name="cardEmail"
                        type="email" id="input-group-1"
                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                        placeholder="name@flowbite.com"
-                       required>
+                       required> -->
+                    <Field placeholder="name@flowbite.com" v-model.trim="formAddValues.cardEmail"  name="cardEmail" type="text" 
+                     :class="{ 'is-invalid': errors.cardEmail }"
+                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                     clearable autofocus/> 
               </div>
-              <p v-if="!!errors.cardEmail && checkValidate.cardEmail && !formAddValues.cardEmail.length" class="validate-message">
+              <!-- <p v-if="!!errors.cardEmail && checkValidate.cardEmail && !formAddValues.cardEmail.length" class="validate-message">
                 {{errors.cardEmail}}
               </p>
               <div v-if="!!errors.cardEmail && checkValidate.cardEmail && formAddValues.cardEmail.length>50" class="validate-message">
                   Email phải dưới 50 ký tự
-              </div>
+              </div> -->
+              <div class="validate-message">{{errors.cardEmail}}</div>
+
             </div>
             <div>
               <ion-label class="mb-5">Card name<span>*</span></ion-label>
@@ -45,7 +51,7 @@
                      name="cardName"
                      type="text" id="first_name"
                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                     placeholder="John" required>
+                     placeholder="John" required allow-clear>
               <div v-if="!!errors.cardName && checkValidate.cardName && !formAddValues.cardName.length" class="validate-message">
                 {{errors.cardName}}
               </div>
@@ -58,7 +64,7 @@
                      name="cardNumber"
                      type="text" id="first_name"
                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                     placeholder="John" required>
+                     placeholder="John" required allow-clear>
               <div v-if="!!errors.cardNumber && checkValidate.cardNumber && !formAddValues.cardNumber.length" class="validate-message">
                 {{errors.cardNumber}}
               </div>
@@ -71,7 +77,7 @@
                      name="cardCVC"
                      type="text" id="first_name"
                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                     placeholder="John" required>
+                     placeholder="John" required allow-clear>
               <div v-if="!!errors.cardCVC && checkValidate.cardCVC && !formAddValues.cardCVC.length" class="validate-message">
                 {{errors.cardCVC}}
               </div>
@@ -85,7 +91,7 @@
                      :class="{ 'hasError': !!errors.cardExpYear && checkValidate.cardExpYear  && !formAddValues.cardExpYear.length}"
                      type="text" id="first_name"
                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                     placeholder="John" required>
+                     placeholder="John" required allow-clear>
               <div v-if="!!errors.cardExpYear && checkValidate.cardExpYear && !formAddValues.cardExpYear.length" class="validate-message">
                 {{ errors.cardExpYear}}
               </div>
@@ -101,5 +107,5 @@
   </template>
   
   <script src="./pageForm.ts" lang="ts"></script>
-  <style src="./pageForm.scss" ></style>
+  <style src="./pageForm.scss" scoped></style>
   

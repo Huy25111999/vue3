@@ -29,7 +29,7 @@ import SelectField from '@/assets/controls/SelectField.vue';
                             <v-col cols="4" sm="4" md="4" pr="6">
                                 <div class="form-group col-5">
                                     <p>First Name</p>
-                                    <Field  v-model.trim="formAddValues.firstName"  name="firstName" 
+                                    <Field clearable v-model.trim="formAddValues.firstName"  name="firstName" 
                                         placeholder="First name" type="text"  class="form-control" :class="{ 'is-invalid': errors.firstName }" />
                                     <div class="invalid-feedback">{{errors.firstName}}</div>
                                 </div>
@@ -78,6 +78,7 @@ import SelectField from '@/assets/controls/SelectField.vue';
                         </v-row>
 
                         <v-row>
+                            <h3>Date time</h3>
                             <v-col cols="6" sm="6" md="6" pr="6">
                                 <InputDatepicker
                                     name="dateFrom"
@@ -88,7 +89,7 @@ import SelectField from '@/assets/controls/SelectField.vue';
                             </v-col>
                             <v-col cols="6" sm="6" md="6" pr="6">
                                 <InputDatepicker
-                                    name="dateFrom"
+                                    name="dateTo"
                                     :label="`customer_detail_user_history_date_from`"
                                     :placeholder="`customer_detail_user_history_date_from`"
                                v-model="formAddValues.dateTo"

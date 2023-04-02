@@ -3,53 +3,53 @@
 	<!-- <router-view></router-view> -->
 	<div class="sidebar">
 		<aside :class="`${is_expanded ? 'is-expanded' : ''}`">
-		<div class="logo">
-			<img :src="logoURL" alt="Vue" /> 
-		</div>
+			<div class="logo">
+				<img :src="logoURL" alt="Vue" /> 
+			</div>
 
-		<div class="menu-toggle-wrap">
-			<button class="menu-toggle" @click="ToggleMenu">
-				<span class="material-icons">keyboard_double_arrow_right</span>
-			</button>
-		</div>
+			<div class="menu-toggle-wrap">
+				<button class="menu-toggle" @click="ToggleMenu">
+					<span class="material-icons">keyboard_double_arrow_right</span>
+				</button>
+			</div>
 
-		<h3>Menu</h3>
-		<div class="menu">
-			<router-link to="/home" class="button">
-				<span class="material-icons">home</span>
-				<span class="text">Home</span>
-			</router-link>
+			<h3>Menu</h3>
+			<div class="menu">
+				<router-link to="/home" class="button">
+					<span class="material-icons">home</span>
+					<span class="text">Home</span>
+				</router-link>
 
-			<ul>
-				<li>
-					<router-link to="/form" class="button">
-						<span class="material-icons">description</span>
-						<span class="text">Form</span>
-					</router-link>
-				</li>
-				<li>
-					<router-link to="/form-validate" class="button">
-						<span class="material-icons">description</span>
-						<span class="text">Form validate</span>
-					</router-link>
-				</li>
-			</ul>
+				<ul>
+					<li>
+						<router-link to="/form" class="button">
+							<span class="material-icons">description</span>
+							<span class="text">Form</span>
+						</router-link>
+					</li>
+					<li>
+						<router-link to="/form-validate" class="button">
+							<span class="material-icons">description</span>
+							<span class="text">Form validate</span>
+						</router-link>
+					</li>
+				</ul>
 
-			<router-link to="/login" class="button">
-				<span class="material-icons">email</span>
-				<span class="text">Login</span>
-			</router-link>
-		</div>
+				<router-link to="/login" class="button">
+					<span class="material-icons">email</span>
+					<span class="text">Login</span>
+				</router-link>
+			</div>
 
-		<div class="flex"></div>
-		
-		<div class="menu">
-			<router-link to="/settings" class="button">
-				<span class="material-icons">settings</span>
-				<span class="text">Settings</span>
-			</router-link>
-		</div>
-	</aside>
+			<div class="flex"></div>
+			
+			<div class="menu">
+				<router-link to="/settings" class="button">
+					<span class="material-icons">settings</span>
+					<span class="text">Settings</span>
+				</router-link>
+			</div>
+		</aside>
 	</div>
 	
 </template>
@@ -221,10 +221,10 @@ const ToggleMenu = () => {
 		border: 0;
 	}
 
-	@media (min-width: 768px){
+	/* @media (min-width: 768px){
 		.container {
 			max-width: 100%;
 		}
-	}
+	} */
 
 </style>

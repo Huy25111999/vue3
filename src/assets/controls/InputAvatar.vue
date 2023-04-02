@@ -12,9 +12,6 @@
           <img src="@/common/assets/upload.png" class="mb-3" />
           <p>"add_admin_file_avatar"</p>
         </div>
-        <!-- <Field :name="name" type="file" @input ="onFileDrop" 
-              ref="myFile"
-              accept="image/*" /> -->
   
         <div class="image">
           <input type="file" ref="myFile" @input="onFileDrop" accept=".jpeg, .jpg, .png"><br/>
@@ -77,7 +74,6 @@
       };
   
       const onDragLeave = () => {
-        // wrapperRef.value.classList.remove("dragover");
       };
   
       const onFileDrop = (e: any) => {
@@ -96,7 +92,7 @@
         if(!file || file.type.indexOf('image/') !== 0) return;
           size.value = file.size;
           if(size.value > MAX_SIZE) {
-            imageError.value = intl('add_admin_file_size');
+            imageError.value = 'add_admin_file_size';
             filePreview.value = "";
             return;
           }
