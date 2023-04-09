@@ -9,16 +9,18 @@ import InputAvatar from "@/assets/controls/InputAvatar.vue";
 import SelectField from "@/assets/controls/SelectField.vue";
 import InputDatePicker from "@/assets/controls/InputDatePicker.vue";
 import moment from "moment";
+import InputField from "@/assets/controls/InputField.vue";
 
 const MAX_SIZE = 10*1024*1024;
 
 export default defineComponent({
-  name: "WalletsPage",
+  name: "ValidateForm",
   components: {
     Form,
     Field,
     InputAvatar,
     SelectField,
+    InputField,
     InputDatePicker
   },
   setup(props, ctx) {
@@ -55,7 +57,7 @@ export default defineComponent({
         if (dateFrom) {             
           const dayAfter = new Date(moment(new Date(dateFrom.getTime())).subtract(1, "days").toDate().setHours(0,0,0));
           const beforeOneMonth = new Date(
-            moment(dayAfter).add(28, "days").toDate().setHours(24,0,0)
+            moment(dayAfter).add(29, "days").toDate().setHours(24,0,0)
           );          
           return schema
             .min(dayAfter, "customer_detail_user_history_min_length")
@@ -66,6 +68,22 @@ export default defineComponent({
         }
         return schema;
       }),
+
+      // dateTo: Yup.date().when("dateFrom", (dateFrom, schema) => {
+      //   if (dateFrom) {
+      //     const dayAfter = new Date(dateFrom.getTime());
+      //     const beforeOneMonth = new Date(
+      //       moment(dayAfter).add(30, "days").toDate()
+      //     );
+      //     return schema
+      //       .min(dayAfter, "customer_detail_user_history_min_length")
+      //       .max(
+      //         beforeOneMonth,
+      //         "customer_detail_user_history_max_length"
+      //       );
+      //   }
+      //   return schema;
+      // }),
     });
 
     const options = [

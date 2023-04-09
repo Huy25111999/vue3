@@ -33,6 +33,12 @@
 							<span class="text">Form validate</span>
 						</router-link>
 					</li>
+					<li>
+						<router-link to="/modal" class="button">
+							<span class="material-icons">description</span>
+							<span class="text">Modal</span>
+						</router-link>
+					</li>
 				</ul>
 
 				<router-link to="/login" class="button">

@@ -31,7 +31,7 @@ const router = createRouter({
         path: "",
         name:'form',
         component: () => import ("../views/form/pageForm.vue"),
-    }]
+      }]
     },
     {
       path: '/form-validate',
@@ -40,9 +40,16 @@ const router = createRouter({
         path: "",
         name:'form-validate',
         component: () => import ("../views/form/validate/validate-form.vue"),
-    }
-  
-  ]   
+      }]   
+    },
+    {
+      path: '/modal',
+      component: Layout,
+      children:[{
+        path: "",
+        name:'modal',
+        component: () => import ("../views/modal/Modal.vue"),
+      }]   
     }
   ]
 });

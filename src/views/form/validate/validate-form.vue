@@ -1,6 +1,4 @@
 
-import SelectField from '@/assets/controls/SelectField.vue';
-
 <template>
     <div class="wrapper px-8 mt-5">
       <v-card class="p-4 mb-5 pb-3">
@@ -78,21 +76,20 @@ import SelectField from '@/assets/controls/SelectField.vue';
                         </v-row>
 
                         <v-row>
-                            <h3>Date time</h3>
                             <v-col cols="6" sm="6" md="6" pr="6">
-                                <InputDatepicker
+                                <InputDatePicker
                                     name="dateFrom"
-                                    :label="`customer_detail_user_history_date_from`"
-                                    :placeholder="`customer_detail_user_history_date_from`"
-                               v-model="formAddValues.dateFrom"
+                                    :placeholder="'Date start'"
+                                    :label="'Date start'"
+                                    v-model="formAddValues.dateFrom"
                                 />
                             </v-col>
                             <v-col cols="6" sm="6" md="6" pr="6">
-                                <InputDatepicker
+                                <InputDatePicker
                                     name="dateTo"
-                                    :label="`customer_detail_user_history_date_from`"
-                                    :placeholder="`customer_detail_user_history_date_from`"
-                               v-model="formAddValues.dateTo"
+                                    :placeholder="'Date end'"
+                                    :label="'Date end'"
+                                    v-model="formAddValues.dateTo"
                                 />
                             </v-col>
                         </v-row>
