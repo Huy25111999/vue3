@@ -90,7 +90,7 @@
   
     .wrapper-right {
       width: 100%;
-      background: #aca8a8;
+      background: #f5f3f3;
     }
     .wrapper-container{
       width: 100%;

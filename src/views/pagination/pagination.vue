@@ -69,6 +69,10 @@
         <v-table  >
           <thead>
             <tr>
+              <th scope="col" class="text-center">
+                <input class="form-check-input" type="checkbox" v-model="checked" name="checked"
+                @change="onAllChecked($event)">
+              </th>
               <th scope="col" class="text-center">STT</th>
               <th scope="col">ID</th>
               <th scope="col">Name</th>
@@ -76,7 +80,7 @@
               <th scope="col">Method</th>
               <th scope="col">Đường dẫn</th>
               <th scope="col" class="text-center" style="width:300px">Thao tác</th>
-            </tr>
+            </tr>{{ setOfCheckedId }}
           </thead>
           <tbody>
             <RoleTr 
@@ -87,6 +91,8 @@
               :pagination="pagination"
               :onEdit="uiEvents.onShowEdit"
               :onDelete="uiEvents.onShowDelete"
+              :setOfCheckedId = "setOfCheckedId"
+              :onItemChecked = "onItemChecked"
             />
           </tbody>
         </v-table>

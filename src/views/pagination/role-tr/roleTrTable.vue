@@ -1,5 +1,9 @@
 <template>
     <tr>
+        <td>
+            <input class="form-check-input" type="checkbox" v-model="isChecked" name="isChecked"
+            @change="$props.onItemChecked($props?.item?.id, $event)">
+        </td>
         <td >{{$props.pagination.pageSize * ($props.pagination.pageNumber-1) + $props.index + 1}}</td>
         <td>
             <div class="flex items-center">

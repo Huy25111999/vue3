@@ -52,6 +52,7 @@ export default defineComponent({
         name: formFilters.name?.trim(),
       };
       actions.fetchAllRoleFilters(params);
+      refreshCheckedStatus()
     };
 
     //Reset
@@ -63,62 +64,62 @@ export default defineComponent({
     }
 
     // pagination datatable
-    // const roleList: Array<Enum.IRole> = computed( ()=>
-    //   store.getters.role.roleList as any
-    //   )
+    const roleList = computed( ()=>
+      store.getters.role.roleList as any
+      )
     
-    const roleList = [
-      {
-        id: "1233473485304830480348038573454937",
-        name: 'Frozen Yogurt',
-        code: "acns",
-        method: "GET",
-        path: "145.279.4.12",
-      },
-      {
-        id: "12483648736487263482374892374892374982",
-        name: 'Ice cream sandwich',
-        code: "3823",
-        method: "POST",
-        path: "145.279.4.12",
-      },
-      {
-        id:"347384792834789234w7294792233",
-        name: 'Eclair',
-        code: "3424",
-        method: "DELETE",
-        path: "145.279.4.12",
-      },
-      {
-        id: "123283y79283749837493879843",
-        name: 'Frozen Yogurt',
-        code: "acns",
-        method: "GET",
-        path: "145.279.4.12",
-      },
-      {
-        id: "1248397483478384834838483",
-        name: 'Ice cream sandwich',
-        code: "3823",
-        method: "POST",
-        path: "145.279.4.12",
-      },
-      {
-        id:"34733o497938479494397",
-        name: 'Eclair',
-        code: "3424",
-        method: "DELETE",
-        path: "145.279.4.12",
-      },
-      {
-        id: "12483648736487263482374892374892374982",
-        name: 'Ice cream sandwich',
-        code: "3823",
-        method: "POST",
-        path: "145.279.4.12",
-      }
+    // const roleList = [
+    //   {
+    //     id: "1233473485304830480348038573454937",
+    //     name: 'Frozen Yogurt',
+    //     code: "acns",
+    //     method: "GET",
+    //     path: "145.279.4.12",
+    //   },
+    //   {
+    //     id: "12483648736487263482374892374892374982",
+    //     name: 'Ice cream sandwich',
+    //     code: "3823",
+    //     method: "POST",
+    //     path: "145.279.4.12",
+    //   },
+    //   {
+    //     id:"347384792834789234w7294792233",
+    //     name: 'Eclair',
+    //     code: "3424",
+    //     method: "DELETE",
+    //     path: "145.279.4.12",
+    //   },
+    //   {
+    //     id: "123283y79283749837493879843",
+    //     name: 'Frozen Yogurt',
+    //     code: "acns",
+    //     method: "GET",
+    //     path: "145.279.4.12",
+    //   },
+    //   {
+    //     id: "1248397483478384834838483",
+    //     name: 'Ice cream sandwich',
+    //     code: "3823",
+    //     method: "POST",
+    //     path: "145.279.4.12",
+    //   },
+    //   {
+    //     id:"34733o497938479494397",
+    //     name: 'Eclair',
+    //     code: "3424",
+    //     method: "DELETE",
+    //     path: "145.279.4.12",
+    //   },
+    //   {
+    //     id: "12483648736487263482374892374892374982",
+    //     name: 'Ice cream sandwich',
+    //     code: "3823",
+    //     method: "POST",
+    //     path: "145.279.4.12",
+    //   }
       
-    ]
+    // ]
 
     const totalRoles = computed(() => store.getters.role.total);
     const loading = computed(() => store.getters.role.loading);
@@ -199,6 +200,52 @@ export default defineComponent({
       
     }
 
+    // checkbox
+    const checked = ref(false);
+    const setOfCheckedId = new Set<any>();
+    const itemRecord = ref<any>([]);
+
+    const onAllChecked = (value: boolean)=>{
+      if(roleList){
+        console.log("roleList", roleList);
+        roleList.value.forEach((item: any) => updateCheckedSet(item?.id, value));
+        refreshCheckedStatus();
+      }
+    };
+
+    const onItemChecked = (id: any, checked: boolean)=>{
+      updateCheckedSet(id, checked);
+      refreshCheckedStatus();
+    };
+
+    const updateCheckedSet= (id:any, checked: boolean)=>{
+      console.log("checkedSet", checked);
+      
+      if(checked){
+        setOfCheckedId.add(id);
+
+        const getItemFromId = roleList.value.filter((e :any )=>{
+          return e.id = id
+        })
+        if(getItemFromId){
+          itemRecord.value.push(getItemFromId[0]);
+        }
+        console.log("itemRecord", itemRecord.value);
+      }else{
+        setOfCheckedId.delete(id);
+        const getItemFromId = itemRecord.value.filter((e :any )=>{
+          return e.id = id
+        })
+        if(getItemFromId){
+          itemRecord.value.splice(getItemFromId, 1);
+        }
+      }
+    }
+
+    const refreshCheckedStatus = ()=>{
+      checked.value = roleList.value.every((e: any) => setOfCheckedId.has(e.id))
+    }
+
     return{
       //Search form
         formFilters,
@@ -222,7 +269,12 @@ export default defineComponent({
         roleSelected,
         //Xóa
         showDelete,
-        onDelete
+        onDelete,
+        // checkbox
+        checked,
+        onAllChecked,
+        onItemChecked,
+        setOfCheckedId
 
     }
   }
