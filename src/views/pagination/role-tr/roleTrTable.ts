@@ -1,7 +1,9 @@
 import { ref, watchEffect, defineComponent, watch } from "vue";
 export default defineComponent({
     name:"roleTrTable",
-    props:["item", "index", "pagination", "onEdit","onDelete", "onItemChecked", "setOfCheckedId"],
+    props:["item", "index", "pagination", "onEdit","onDelete", "onItemChecked", "setOfCheckedId",
+            "onSelectRow", "ids"
+            ],
     setup(props, ctx){
         const isCopy = ref(false);
         const isChecked = ref(false);
@@ -11,12 +13,11 @@ export default defineComponent({
                 isCopy.value = false;
             },2000);
         }
-        watch(isChecked,() => {
-            console.log("----props.item",isChecked.value );
-            if(isChecked.value){
-                props.setOfCheckedId.has(props.item.id)
-                console.log(props.setOfCheckedId.has(props.item.id));
-            }
+        // watch(isChecked,() => {
+        //     if(isChecked.value){
+        //         props.setOfCheckedId.has(props.item.id)
+        //         console.log(props.setOfCheckedId.has(props.item.id));
+        //     }
             
             // const arr= props.ids.map((e:any) => e.code);       
             // if (arr.includes(props.item.code)) {
@@ -24,9 +25,24 @@ export default defineComponent({
             // } else {
             //   isChecked.value = false;
             // }
+         // });
+         const handleSelectRow = () => {
+            props.onSelectRow(props.item);  
+            console.log("props.ids----", props.ids)    
+          };
+
+          watchEffect(() => {
+            console.log("props.ids----11111", props.ids);
+            if (props.ids.includes(props.item.code)) {
+                isChecked.value = true;
+              } else {
+                isChecked.value = false;
+              };
+
           });
+
         return{
-            onCopy,isCopy, isChecked
+            onCopy,isCopy, isChecked, handleSelectRow
         }
     }
 })

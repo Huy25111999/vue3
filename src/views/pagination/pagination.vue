@@ -70,8 +70,10 @@
           <thead>
             <tr>
               <th scope="col" class="text-center">
-                <input class="form-check-input" type="checkbox" v-model="checked" name="checked"
-                @change="onAllChecked($event)">
+                <!-- <input class="form-check-input" type="checkbox" v-model="checked" name="checked"
+                @change="onAllChecked($event)"> -->
+                <v-checkbox class="form-check-input" type="checkbox" v-model="selectAll" name="selectAll" @click = "handleSelectAllRow">
+                </v-checkbox>    
               </th>
               <th scope="col" class="text-center">STT</th>
               <th scope="col">ID</th>
@@ -80,7 +82,7 @@
               <th scope="col">Method</th>
               <th scope="col">Đường dẫn</th>
               <th scope="col" class="text-center" style="width:300px">Thao tác</th>
-            </tr>{{ setOfCheckedId }}
+            </tr>
           </thead>
           <tbody>
             <RoleTr 
@@ -93,6 +95,8 @@
               :onDelete="uiEvents.onShowDelete"
               :setOfCheckedId = "setOfCheckedId"
               :onItemChecked = "onItemChecked"
+              :ids = "ids"
+              :onSelectRow = "handleSelectRow"
             />
           </tbody>
         </v-table>

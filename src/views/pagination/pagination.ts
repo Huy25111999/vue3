@@ -5,6 +5,7 @@ import {
     reactive,
     ref,
     watch,
+    watchEffect,
   } from "vue";
 // Components form
 import { Form } from "vee-validate";
@@ -242,9 +243,48 @@ export default defineComponent({
       }
     }
 
-    const refreshCheckedStatus = ()=>{
+    const refreshCheckedStatus = ()=>{  
       checked.value = roleList.value.every((e: any) => setOfCheckedId.has(e.id))
     }
+
+    // checkbox new
+    const selectAll = ref<boolean>(false);
+    const ids = ref<Array<string>>([]);
+
+    const handleSelectAllRow  = ()=>{
+      selectAll.value =  !selectAll.value ;
+      if(selectAll.value){
+        ids.value = roleList.value.map((e:any) => {return  e.code});
+        console.log("ids.value", ids.value);
+      }else{
+        ids.value = []
+      };  
+    };
+
+    const handleSelectRow =(item:any)=>{ 
+      console.log("item", item);
+        
+      console.log("ids.value", ids.value);
+         
+      if(!ids.value.map((k:any) =>k.code).includes(item.code)){       
+        ids.value.push(item.code);
+        console.log('1', ids.value);
+        
+      }else{
+        ids.value = ids.value.filter((e:any) =>{
+          e !== item.code
+        });
+        console.log('2', ids.value);
+      }
+    };  
+
+    watchEffect(() => {
+      if (ids.value.length === pagination.pageSize * pagination.pageNumber) {
+        selectAll.value = true;
+      } else {
+        selectAll.value = false;
+      }
+    });
 
     return{
       //Search form
@@ -274,7 +314,13 @@ export default defineComponent({
         checked,
         onAllChecked,
         onItemChecked,
-        setOfCheckedId
+        setOfCheckedId,
+
+        //checkbox new
+        handleSelectAllRow,
+        selectAll,
+        ids,
+        handleSelectRow,
 
     }
   }

@@ -81,7 +81,7 @@ const ToggleMenu = () => {
 		display: flex;
 		flex-direction: column;
 
-		background-color: #1e293b;
+		background-color: #041630;
 		color: #f1f5f9;
 
 		width: calc(2rem + 32px);
