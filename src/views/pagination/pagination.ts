@@ -254,31 +254,30 @@ export default defineComponent({
     const handleSelectAllRow  = ()=>{
       selectAll.value =  !selectAll.value ;
       if(selectAll.value){
-        ids.value = roleList.value.map((e:any) => {return  e.code});
+        ids.value = roleList.value.map((e:any) => {return  e});
         console.log("ids.value", ids.value);
       }else{
-        ids.value = []
+        ids.value = [];
+        console.log("----", ids.value);
       };  
     };
 
-    const handleSelectRow =(item:any)=>{ 
-      console.log("item", item);
-        
-      console.log("ids.value", ids.value);
-         
+    const handleSelectRow =(item:any)=>{          
       if(!ids.value.map((k:any) =>k.code).includes(item.code)){       
-        ids.value.push(item.code);
-        console.log('1', ids.value);
-        
+        ids.value.push(item);        
       }else{
         ids.value = ids.value.filter((e:any) =>{
-          e !== item.code
+          if(e.code !== item.code){
+            return e;
+          }
         });
-        console.log('2', ids.value);
-      }
+      };
+      console.log(' ids.value', ids.value);
     };  
 
     watchEffect(() => {
+      //ids.value = props.groupRoleSelected?.roles || [];
+      console.log("---",ids.value)
       if (ids.value.length === pagination.pageSize * pagination.pageNumber) {
         selectAll.value = true;
       } else {

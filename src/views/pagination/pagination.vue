@@ -72,7 +72,7 @@
               <th scope="col" class="text-center">
                 <!-- <input class="form-check-input" type="checkbox" v-model="checked" name="checked"
                 @change="onAllChecked($event)"> -->
-                <v-checkbox class="form-check-input" type="checkbox" v-model="selectAll" name="selectAll" @click = "handleSelectAllRow">
+                <v-checkbox v-model="selectAll" @click = "handleSelectAllRow">
                 </v-checkbox>    
               </th>
               <th scope="col" class="text-center">STT</th>

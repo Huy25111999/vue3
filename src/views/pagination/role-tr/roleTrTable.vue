@@ -4,7 +4,7 @@
             <!-- <input class="form-check-input" type="checkbox" v-model="isChecked" name="isChecked"
             @change="$props.onItemChecked($props?.item?.id, $event)">
          -->
-         <v-checkbox class="form-check-input" v-model="isChecked"> </v-checkbox>
+         <v-checkbox class="form-check-input" v-model="isChecked" @click="handleSelectRow"> </v-checkbox>
      
         </td>
         <td >{{$props.pagination.pageSize * ($props.pagination.pageNumber-1) + $props.index + 1}}</td>

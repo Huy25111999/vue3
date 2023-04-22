@@ -50,18 +50,27 @@ const router = createRouter({
         name:'modal',
         component: () => import ("../views/modal/Modal.vue"),
       }]   
+    },
+    {
+      path: '/table',
+      component: Layout,
+      children:[{
+        path: "",
+        name:'table',
+        component: () => import ("../views/table/Table.vue"),
+      }]   
     }
   ]
 });
 
-router.beforeEach((to, from, next) => {
-  if (to.fullPath === "/home" && from.fullPath === "/login") {
-    next();
-  } else if (to.fullPath !== "/login" && !store.getters.auth.userInfo?.token) {
-    next({ path: "/login" });
-  } else if (to.fullPath === "/login" && store.getters.auth.userInfo?.token) {
-    next({ path: "/home" });
-  } else next();
-});
+// router.beforeEach((to, from, next) => {
+//   if (to.fullPath === "/home" && from.fullPath === "/login") {
+//     next();
+//   } else if (to.fullPath !== "/login" && !store.getters.auth.userInfo?.token) {
+//     next({ path: "/login" });
+//   } else if (to.fullPath === "/login" && store.getters.auth.userInfo?.token) {
+//     next({ path: "/home" });
+//   } else next();
+// });
 
 export default router

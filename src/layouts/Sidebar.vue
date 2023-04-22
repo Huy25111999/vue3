@@ -29,7 +29,7 @@
 					</li>
 					<li>
 						<router-link to="/form-validate" class="button">
-							<span class="material-icons">description</span>
+							<span class="material-icons">favorite</span>
 							<span class="text">Form validate</span>
 						</router-link>
 					</li>
@@ -37,6 +37,12 @@
 						<router-link to="/modal" class="button">
 							<span class="material-icons">description</span>
 							<span class="text">Modal</span>
+						</router-link>
+					</li>
+					<li>
+						<router-link to="/table" class="button">
+							<span class="material-icons">attachment</span>
+							<span class="text">Table</span>
 						</router-link>
 					</li>
 				</ul>

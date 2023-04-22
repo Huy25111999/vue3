@@ -26,14 +26,13 @@ export default defineComponent({
             //   isChecked.value = false;
             // }
          // });
-         const handleSelectRow = () => {
+         const handleSelectRow = () => {            
             props.onSelectRow(props.item);  
-            console.log("props.ids----", props.ids)    
           };
 
           watchEffect(() => {
-            console.log("props.ids----11111", props.ids);
-            if (props.ids.includes(props.item.code)) {
+            const arr = props.ids.map((e:any) => e.code);
+            if (arr.includes(props.item.code)) {
                 isChecked.value = true;
               } else {
                 isChecked.value = false;
