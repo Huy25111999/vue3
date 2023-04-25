@@ -6,7 +6,7 @@ import SelectField from "@/assets/controls/SelectField.vue";
 import TextareaField from "@/assets/controls/TextareaField.vue";
 import * as Yup from "yup";
 
-import { Enum } from "@/types";
+import type { Enum } from "@/types";
 import * as actions from "@/api/roles/roleActions";
 import { useSnackBar } from "@/helpers/useSnackbar";
 

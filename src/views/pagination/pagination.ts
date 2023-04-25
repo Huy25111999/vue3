@@ -12,14 +12,14 @@ import { Form } from "vee-validate";
 import InputField from "@/assets/controls/InputField.vue";
 
 
-import  {Enum}  from "@/types"; 
+import type {Enum}  from "@/types"; 
 import * as actions from "@/api/roles/roleActions";
-import RoleTr from "./role-tr/roleTrTable.vue";
 import store from "@/vuex/store";
 
 //modal
-import RoleAdd from  "./role-add/roleAdd.vue"
-import RoleEdit from "./role-edit/roleEdit.vue"
+import RoleAdd from  "./role-add/roleAdd.vue";
+import RoleEdit from "./role-edit/roleEdit.vue";
+import RoleTr from "./role-tr/roleTrTable.vue";
 import ModalDelete from "@/components/modal-delete/ModalDelete.vue";
 
 export default defineComponent({
@@ -53,7 +53,6 @@ export default defineComponent({
         name: formFilters.name?.trim(),
       };
       actions.fetchAllRoleFilters(params);
-      refreshCheckedStatus()
     };
 
     //Reset
@@ -145,6 +144,7 @@ export default defineComponent({
     
     const onPaginate = (pageNumber: number) => {
       pagination.pageNumber = pageNumber;
+      console.log('page',pageNumber)
     };
 
 
@@ -201,51 +201,51 @@ export default defineComponent({
       
     }
 
-    // checkbox
-    const checked = ref(false);
-    const setOfCheckedId = new Set<any>();
-    const itemRecord = ref<any>([]);
+    // checkbox angualar------------
+    // const checked = ref(false);
+    // const setOfCheckedId = new Set<any>();
+    // const itemRecord = ref<any>([]);
 
-    const onAllChecked = (value: boolean)=>{
-      if(roleList){
-        console.log("roleList", roleList);
-        roleList.value.forEach((item: any) => updateCheckedSet(item?.id, value));
-        refreshCheckedStatus();
-      }
-    };
+    // const onAllChecked = (value: boolean)=>{
+    //   if(roleList){
+    //     console.log("roleList", roleList);
+    //     roleList.value.forEach((item: any) => updateCheckedSet(item?.id, value));
+    //     refreshCheckedStatus();
+    //   }
+    // };
 
-    const onItemChecked = (id: any, checked: boolean)=>{
-      updateCheckedSet(id, checked);
-      refreshCheckedStatus();
-    };
+    // const onItemChecked = (id: any, checked: boolean)=>{
+    //   updateCheckedSet(id, checked);
+    //   refreshCheckedStatus();
+    // };
 
-    const updateCheckedSet= (id:any, checked: boolean)=>{
-      console.log("checkedSet", checked);
+    // const updateCheckedSet= (id:any, checked: boolean)=>{
+    //   console.log("checkedSet", id);
       
-      if(checked){
-        setOfCheckedId.add(id);
+    //   if(checked){
+    //     setOfCheckedId.add(id);
 
-        const getItemFromId = roleList.value.filter((e :any )=>{
-          return e.id = id
-        })
-        if(getItemFromId){
-          itemRecord.value.push(getItemFromId[0]);
-        }
-        console.log("itemRecord", itemRecord.value);
-      }else{
-        setOfCheckedId.delete(id);
-        const getItemFromId = itemRecord.value.filter((e :any )=>{
-          return e.id = id
-        })
-        if(getItemFromId){
-          itemRecord.value.splice(getItemFromId, 1);
-        }
-      }
-    }
+    //     const getItemFromId = roleList.value.filter((e :any )=>{
+    //       return e.id = id
+    //     })
+    //     if(getItemFromId){
+    //       itemRecord.value.push(getItemFromId[0]);
+    //     }
+    //     console.log("itemRecord", itemRecord.value);
+    //   }else{
+    //     setOfCheckedId.delete(id);
+    //     const getItemFromId = itemRecord.value.filter((e :any )=>{
+    //       return e.id = id
+    //     })
+    //     if(getItemFromId){
+    //       itemRecord.value.splice(getItemFromId, 1);
+    //     }
+    //   }
+    // }
 
-    const refreshCheckedStatus = ()=>{  
-      checked.value = roleList.value.every((e: any) => setOfCheckedId.has(e.id))
-    }
+    // const refreshCheckedStatus = ()=>{  
+    //   checked.value = roleList.value.every((e: any) => setOfCheckedId.has(e.id))
+    // }
 
     // checkbox new
     const selectAll = ref<boolean>(false);
@@ -277,11 +277,18 @@ export default defineComponent({
 
     watchEffect(() => {
       //ids.value = props.groupRoleSelected?.roles || [];
-      console.log("---",ids.value)
-      if (ids.value.length === pagination.pageSize * pagination.pageNumber) {
+      console.log("slectAdd--length", ids.value.length);
+      console.log("pagination.pageSize * pagination.pageNumber", pagination.pageSize * pagination.pageNumber);
+      
+
+      if (ids.value.length == pagination.pageSize * pagination.pageNumber) {
+      //if (ids.value.length === roleList.value.length) {
         selectAll.value = true;
+        console.log("slectAdd--", selectAll.value);
+        
       } else {
         selectAll.value = false;
+        console.log("slectAdd--1111--", selectAll.value);
       }
     });
 
@@ -309,11 +316,6 @@ export default defineComponent({
         //Xóa
         showDelete,
         onDelete,
-        // checkbox
-        checked,
-        onAllChecked,
-        onItemChecked,
-        setOfCheckedId,
 
         //checkbox new
         handleSelectAllRow,

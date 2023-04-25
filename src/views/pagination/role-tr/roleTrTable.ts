@@ -1,7 +1,7 @@
 import { ref, watchEffect, defineComponent, watch } from "vue";
 export default defineComponent({
     name:"roleTrTable",
-    props:["item", "index", "pagination", "onEdit","onDelete", "onItemChecked", "setOfCheckedId",
+    props:["item", "index", "pagination", "onEdit","onDelete", 
             "onSelectRow", "ids"
             ],
     setup(props, ctx){
@@ -13,19 +13,6 @@ export default defineComponent({
                 isCopy.value = false;
             },2000);
         }
-        // watch(isChecked,() => {
-        //     if(isChecked.value){
-        //         props.setOfCheckedId.has(props.item.id)
-        //         console.log(props.setOfCheckedId.has(props.item.id));
-        //     }
-            
-            // const arr= props.ids.map((e:any) => e.code);       
-            // if (arr.includes(props.item.code)) {
-            //   isChecked.value = true;
-            // } else {
-            //   isChecked.value = false;
-            // }
-         // });
          const handleSelectRow = () => {            
             props.onSelectRow(props.item);  
           };

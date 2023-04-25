@@ -1,9 +1,11 @@
 <template>
     <tr>
+        <!-- <td>
+            <input class="form-check-input" type="checkbox" v-model="$props.checked" name="checked"
+            @click="$props.onItemChecked($props?.item?.id, $event)">
+        
+        </td> -->
         <td>
-            <!-- <input class="form-check-input" type="checkbox" v-model="isChecked" name="isChecked"
-            @change="$props.onItemChecked($props?.item?.id, $event)">
-         -->
          <v-checkbox class="form-check-input" v-model="isChecked" @click="handleSelectRow"> </v-checkbox>
      
         </td>
@@ -35,7 +37,7 @@
         </td>
     </tr>
 </template>
-<script src="./roleTrTable.ts"></script>
+<script src="./roleTrTable.ts" lang="ts"></script>
 <style lang="scss" scoped>
 .coppy-btn {
   color: rgb(171 166 166 / 80%);

@@ -69,9 +69,11 @@
         <v-table  >
           <thead>
             <tr>
-              <th scope="col" class="text-center">
-                <!-- <input class="form-check-input" type="checkbox" v-model="checked" name="checked"
-                @change="onAllChecked($event)"> -->
+              <!-- <th>  
+                <input class="form-check-input" type="checkbox" v-model="checked" name="checked"
+                @click="onAllChecked($event)">
+              </th> -->
+              <th scope="col" class="text-center w-[100px]"> 
                 <v-checkbox v-model="selectAll" @click = "handleSelectAllRow">
                 </v-checkbox>    
               </th>
@@ -93,8 +95,6 @@
               :pagination="pagination"
               :onEdit="uiEvents.onShowEdit"
               :onDelete="uiEvents.onShowDelete"
-              :setOfCheckedId = "setOfCheckedId"
-              :onItemChecked = "onItemChecked"
               :ids = "ids"
               :onSelectRow = "handleSelectRow"
             />
