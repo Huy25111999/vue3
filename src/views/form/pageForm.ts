@@ -5,18 +5,44 @@ import { computed, defineComponent, onMounted, reactive, ref, watch } from "vue"
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
 import * as Yup from "yup";
+import VOtpInput from "vue3-otp-input"
 
 export default defineComponent({
   name: "WalletsPage",
   components: {
     Form,
     Field,
+    VOtpInput,
   },
   setup() {
     const store = useStore();
     const clickSubmit = ref(false);
     const isValid = ref("");
+    const arr = [
+      {name:'abc', id:19},{name:'abcr', id:120},
+      {name:'ab3c', id:19}, {name:'abc', id:19}
+    ]
+    const keys:any = Object.keys(arr);
+    let listData = []
+    
+    for (let key of  keys){
+      // const map = arr.filter(k=>k.id == arr[key].id).map(e=>{
+      //   return {
+      //     name:e.name,
+      //     id: e.id
+      //   }
+      // });
 
+      listData.push({
+        name: arr[key].name,
+      })
+      console.log("listData", listData);
+      
+    } 
+
+  //  console.log("arr", arr);
+
+    
     const schemaAddCard = Yup.object().shape({
       cardName: Yup.string()
           .required("wallet.top-up.error.card_name_require")
@@ -99,6 +125,8 @@ export default defineComponent({
 
       //         })
     }
+
+    // Form otp
 
    
     return {
