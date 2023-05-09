@@ -9,7 +9,7 @@
     >
       <div v-if="!filePreview">
         <div class="__label flex flex-column justify-center items-center">
-          <img src="@/common/assets/upload.png" class="mb-3" />
+          <img src="@/assets/image/upload.png" class="mb-3" />
           <p>"add_admin_file_avatar"</p>
         </div>
   
@@ -33,40 +33,23 @@
   import { Field, useField } from "vee-validate";
   import { defineComponent, ref, watchEffect } from "vue";
   
-  const MAX_SIZE = 10*1024*1024;
-  ;
+  const MAX_SIZE = 10*1024*1024 ;
   
   export default defineComponent({
     name: "InputAvatar",
     components: { Field },
-    props: {
-      modelValue: {
-        type: String,
-        required: true,
-      },
-      label: {
-        type: String,
-      },
-      name: {
-        type: String,
-        required: true,
-      },
-      placeholder: {
-        type: String,
-      },
-        required: {
-        type: Boolean,
-      }
-    },
+    props: ["onChange", "value", "name", "label"],
   
     setup(props, ctx) {
       const wrapperRef = ref();
       const filePreview = ref("");
       const imageError = ref ("");
-      const size = ref("");
+      const size = ref();
   
       watchEffect(() => {
-        filePreview.value = props.modelValue;
+        if (!props.value) {
+        filePreview.value = "";
+      }
       });
   
       const onDragEnter = () => {
@@ -74,6 +57,7 @@
       };
   
       const onDragLeave = () => {
+        wrapperRef.value.classList.remove("dragover");
       };
   
       const onFileDrop = (e: any) => {
@@ -82,11 +66,9 @@
   
         if (file) {
           wrapperRef.value.classList.remove("dragover");
-          ctx.emit("input", file);
           filePreview.value = URL.createObjectURL(file);
-  
           console.log("filePreview", filePreview);
-          
+          props.onChange && props.onChange(file);
         }  
   
         if(!file || file.type.indexOf('image/') !== 0) return;
@@ -103,7 +85,7 @@
   
       const onRemove = () => {
         filePreview.value = "";
-        ctx.emit("input", "");
+        props.onChange && props.onChange(undefined);
       };
 
       return {

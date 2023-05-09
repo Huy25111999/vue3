@@ -144,7 +144,6 @@ export default defineComponent({
     
     const onPaginate = (pageNumber: number) => {
       pagination.pageNumber = pageNumber;
-      console.log('page',pageNumber)
     };
 
 
@@ -182,7 +181,6 @@ export default defineComponent({
       onShowDelete: (role: Enum.IRole) =>{
         showDelete.value = true
         roleSelected.value = role
-        console.log("roleSelected",roleSelected);
         
       },
 
@@ -197,7 +195,6 @@ export default defineComponent({
       const params: Enum.IRole = {
         id: roleSelected.value?.id,
       };
-      console.log("params delete", params);
       
     }
 
@@ -255,10 +252,8 @@ export default defineComponent({
       selectAll.value =  !selectAll.value ;
       if(selectAll.value){
         ids.value = roleList.value.map((e:any) => {return  e});
-        console.log("ids.value", ids.value);
       }else{
         ids.value = [];
-        console.log("----", ids.value);
       };  
     };
 
@@ -272,23 +267,17 @@ export default defineComponent({
           }
         });
       };
-      console.log(' ids.value', ids.value);
     };  
 
     watchEffect(() => {
       //ids.value = props.groupRoleSelected?.roles || [];
-      console.log("slectAdd--length", ids.value.length);
-      console.log("pagination.pageSize * pagination.pageNumber", pagination.pageSize * pagination.pageNumber);
-      
-
+ 
       if (ids.value.length == pagination.pageSize * pagination.pageNumber) {
       //if (ids.value.length === roleList.value.length) {
         selectAll.value = true;
-        console.log("slectAdd--", selectAll.value);
         
       } else {
         selectAll.value = false;
-        console.log("slectAdd--1111--", selectAll.value);
       }
     });
 

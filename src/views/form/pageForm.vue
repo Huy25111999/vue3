@@ -89,7 +89,7 @@
                 {{ errors.cardExpYear }}
               </div>
             </div>
-            <button class="btn w-[300px] h-[40px] mt-6 btn-primary sbmBtn bg-primary" type="submit"
+            <button class="btn mt-6 btn-primary sbmBtn bg-primary" type="submit"
               @click="handleSubmit(formAddValues)">Submit</button>
           </Form>
         </div>
@@ -97,15 +97,29 @@
         <v-card-title>OTP</v-card-title>
         <div class="px-8">
           <Form class="form-confirm">
-            <v-otp-input
-            class="flex justify-center items-center"
-            input-classes="otp-input-custom bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            :num-inputs="5"
-            :should-auto-focus="true"
-            :is-input-num="true"
-            :conditionalClass="['one', 'two', 'three', 'four', 'five']"
-            >
+            <v-otp-input class="flex justify-center items-center"
+              input-classes="otp-input-custom mr-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              :num-inputs="5" :should-auto-focus="true" :is-input-num="true" separator=" "
+              :conditionalClass="['one', 'two', 'three', 'four', 'five']" @on-complete="handleOnComplete">
             </v-otp-input>
+          </Form>
+        </div>
+
+
+        <div class="px-8 mt-4 justify-between" style="display: flex; flex-direction: row">
+          <Form class="form-confirm">
+            <v-otp-input ref="otpInput" v-model:value="bindModal" class="flex justify-center items-center"
+              input-classes="otp-input otp-input-custom bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              separator="-" :num-inputs="4" :should-auto-focus="true" input-type="letter-numeric"
+              :conditionalClass="['one', 'two', 'three', 'four']" :placeholder="['*', '*', '*', '*']"
+              @on-change="handleOnChange" @on-complete="handleOnComplete" />
+
+            <div class="flex justify-center items-center">
+              <button type="button" class="btn w-[100px] mt-6 mr-4 h-[48px] btn-primary sbmBtn bg-primary"
+                @click="clearInput()">Clear Input</button>
+              <button type="button" class="btn w-[100px] mt-6 h-[48px] btn-primary sbmBtn bg-primary"
+                @click="fillInput('2929')">Fill Input</button>
+            </div>
           </Form>
         </div>
       </div>

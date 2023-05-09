@@ -115,17 +115,23 @@ export default defineComponent({
       acceptTerms: false,
       files: undefined,
       dateFrom: moment().subtract(7, "day").toDate(),
-      dateTo: moment().toDate()
+      dateTo: moment().toDate(),
+      avatar: undefined
     });
  
     const onSubmit = (values:any) => {        
-        console.log("fileKycKeys value", files.value);
         const request = {
           ...toRaw(formAddValues),
           files:  files.value
-        }
+        }        
 
         console.log("request",request);
+    }
+
+    const onFileChange = (file: any)=>{
+      formAddValues.avatar = file;
+      console.log("avatar", formAddValues.avatar);
+
     }
 
     onMounted(()=>{
@@ -137,7 +143,7 @@ export default defineComponent({
     const wrapperRef = ref();
     const filePreview = ref("");
     const imageError = ref ("");
-    const size = ref("");
+    const size = ref();
 
     watchEffect(() => {
       filePreview.value 
@@ -184,7 +190,6 @@ export default defineComponent({
     };
 
 
-
     return {
       onSubmit,
       formAddValues,
@@ -200,7 +205,8 @@ export default defineComponent({
       MAX_SIZE, 
       imageError,
       size,
-      options
+      options,
+      onFileChange
         
     };
   },

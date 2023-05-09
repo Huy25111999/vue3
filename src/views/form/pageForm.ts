@@ -127,7 +127,29 @@ export default defineComponent({
     }
 
     // Form otp
+    const otpInputValue = ref();
+    const handleOnComplete = (otp:any)=>{
+      alert("success"+ otp);
+      otpInputValue.value = otp;
+      console.log("otpInputValue", otpInputValue.value)
+    }
 
+    //----------------------------
+    const otpInput = ref<InstanceType<typeof VOtpInput> | null>(null);
+    const bindModal = ref("");
+    
+    const handleOnChange = (value: string) => {
+      console.log("OTP changed: ", value);
+    };
+    
+    const clearInput = () => {
+      otpInput.value?.clearInput();
+    };
+
+    const fillInput = (value: string) => {
+      console.log(value);
+      otpInput.value?.fillInput(value);
+    };
    
     return {
         handleSubmit,
@@ -135,6 +157,14 @@ export default defineComponent({
         schemaAddCard,
         checkValidate,
         validate,
+        handleOnComplete,
+        //-------
+        otpInput,
+        bindModal,
+        handleOnChange,
+        clearInput,
+        fillInput
+
     };
   },
 });
